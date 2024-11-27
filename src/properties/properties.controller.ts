@@ -54,8 +54,9 @@ export class PropertiesController {
       }
     })
   }))
-  uploadFile(@UploadedFile() file: Express.Multer.File,@Param('id') id: number) {
-    this.propertiesService.savePhoto(id,file.filename)
+
+  async uploadFile(@UploadedFile() file: Express.Multer.File,@Param('id') id: number) {
+    await this.propertiesService.savePhoto(id,file.filename)
     console.log(file);
   }
   @Delete('/photo/:id')

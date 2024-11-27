@@ -135,7 +135,9 @@ export class PropertiesService {
   }
 
   async update(id: number, updatePropertyDto: UpdatePropertyDto) {
-    return await this.propertyRepository.update(id, updatePropertyDto);
+    const entityName = await this.propertyRepository.findOneBy({ id });
+    Object.assign(entityName, updatePropertyDto);
+    await this.propertyRepository.save(entityName);
   }
 
   async remove(id: number) {
